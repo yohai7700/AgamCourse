@@ -6,7 +6,9 @@ namespace AgamCourse
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Shop shop = new Shop();
+            ShopPrompt prompt = new ShopPrompt(shop);
+            prompt.Run();
         }
     }
 }

@@ -4,22 +4,34 @@ using System.Text;
 
 namespace AgamCourse
 {
-    class CovidQueue
+    class CovidQueue<T> where T : Person
     {
-        private const float MinBodyTemperature = 30f;
-        Queue<Person> queue;
+        const float MinBodyTemperature = 30f;
+        Queue<T> queue = new Queue<T>();
 
-        public void Enqueue(Person person)
+        public int Count { get => queue.Count; }
+
+        public void Enqueue(T person)
         {
             ValidateEnqueue(person);
             queue.Enqueue(person);
         }
 
-        public Person Dequeue()
+        public T Dequeue()
         {
             return queue.Dequeue();
         }
-        private void ValidateEnqueue(Person person)
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return queue.GetEnumerator();
+        }
+
+        public T[] ToArray()
+        {
+            return queue.ToArray();
+        }
+        private void ValidateEnqueue(T person)
         {
             if (!person.Masked) throw new Exception("Can't insert an unmasked person to the Queue.");
             if (person.Quarantined) throw new Exception("Can't insert a quarantined person to the Queue.");
