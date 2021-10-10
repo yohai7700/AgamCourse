@@ -6,7 +6,7 @@ namespace AgamCourse
 {
     class CovidQueue<T> where T : Person
     {
-        const float MinBodyTemperature = 30f;
+        const float MinBodyTemperature = 38f;
         Queue<T> queue = new Queue<T>();
 
         public int Count { get => queue.Count; }
@@ -35,7 +35,7 @@ namespace AgamCourse
         {
             if (!person.Masked) throw new Exception("Can't insert an unmasked person to the Queue.");
             if (person.Quarantined) throw new Exception("Can't insert a quarantined person to the Queue.");
-            if (person.BodyTemperature > MinBodyTemperature) throw new Exception($"Cant insert a person with a body temperature higher than {person.BodyTemperature}C");
+            if (person.BodyTemperature > MinBodyTemperature) throw new Exception($"Cant insert a person with a body temperature higher than {MinBodyTemperature}C");
         }
     }
 }

@@ -28,11 +28,10 @@ namespace AgamCourse
         private static ShopCommand ReadCommand()
         {
             Console.WriteLine(@"
-                Hello, please choose one of the following options (enter the option's number):
-                1. Enqueue a consumer.
-                2. Proceed an amount of consumer from the queue to the shop.
-                3. Print the amount of consumers in queue.
-            ");
+Hello, please choose one of the following options (enter the option's number):
+1. Enqueue a consumer.
+2. Proceed an amount of consumer from the queue to the shop.
+3. Print the amount of consumers in queue.");
             int command;
             do
             {
@@ -46,15 +45,35 @@ namespace AgamCourse
             switch(command)
             {
                 case ShopCommand.Enqueue:
-                    Console.WriteLine("X");
+                    try
+                    {
+                        shop.Enqueue(ReadConsumer());
+                    } catch (Exception exception)
+                    {
+                        Console.WriteLine($"Could not enqueue the consumer: {exception.Message}");
+                    }
                     break;
                 case ShopCommand.ProceedConsumers:
-                    shop.ProceedConsumers(ReadNumber());
+                    Console.WriteLine("Please enter a number: ");
+                    var proceededConsumers = shop.ProceedConsumers(ReadNumber());
+                    Console.WriteLine($"{proceededConsumers} consumers were proceeded to store.");
                     break;
                 case ShopCommand.Print:
                     Console.WriteLine($"There are {shop.QueuedConsumers.Length} consumers in queue.");
                     break;
             }
+        }
+
+        private static Consumer ReadConsumer()
+        {
+            Consumer consumer = new Consumer();
+            Console.WriteLine("Is the consumer masked?(Y/N)");
+            consumer.Masked = ReadBool();
+            Console.WriteLine("Is the consumer in quarantine?(Y/N)");
+            consumer.Quarantined = ReadBool();
+            Console.WriteLine("What's the consumer's body temperature (C)?");
+            consumer.BodyTemperature = ReadFloat();
+            return consumer;
         }
 
         private static int ReadNumber()
@@ -66,6 +85,27 @@ namespace AgamCourse
                 isValid = Int32.TryParse(Console.ReadLine(), out number);
             } while (!isValid);
             return number;
+        }
+
+        private static float ReadFloat()
+        {
+            float number;
+            bool isValid;
+            do
+            {
+                isValid = float.TryParse(Console.ReadLine(), out number);
+            } while (!isValid);
+            return number;
+        }
+
+        private static bool ReadBool()
+        {
+            string answer;
+            do
+            {
+                answer = Console.ReadLine();
+            } while (!("Y".Equals(answer) || "N".Equals(answer)));
+            return "Y".Equals(answer);
         }
     }
 }

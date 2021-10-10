@@ -15,13 +15,15 @@ namespace AgamCourse
             queue.Enqueue(consumer);
         }
 
-        public void ProceedConsumers(int desiredAmount)
+        /// <returns>The amount of consumers that were proceeded</returns>
+        public int ProceedConsumers(int desiredAmount)
         {
             int amount = Math.Min(desiredAmount, queue.Count);
             for(int i = 0; i < amount; i++)
             {
                 consumers.Add(queue.Dequeue());
             }
+            return amount;
         }
     }
 }
