@@ -5,18 +5,18 @@ namespace AgamCourse
 {
     class Shop
     {
-        CovidQueue<Consumer> queue = new CovidQueue<Consumer>();
-        List<Consumer> consumers = new List<Consumer>();
+        CovidQueue<Costumer> queue = new CovidQueue<Costumer>();
+        List<Costumer> consumers = new List<Costumer>();
 
-        public Consumer[] QueuedConsumers { get => queue.ToArray(); }
+        public Costumer[] QueuedCostumers { get => queue.ToArray(); }
 
-        public void Enqueue(Consumer consumer)
+        public void Enqueue(Costumer consumer)
         {
             queue.Enqueue(consumer);
         }
 
         /// <returns>The amount of consumers that were proceeded</returns>
-        public int ProceedConsumers(int desiredAmount)
+        public int ProceedCostumers(int desiredAmount)
         {
             int amount = Math.Min(desiredAmount, queue.Count);
             for(int i = 0; i < amount; i++)

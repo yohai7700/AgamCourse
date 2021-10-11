@@ -29,9 +29,9 @@ namespace AgamCourse
         {
             Console.WriteLine(@"
 Hello, please choose one of the following options (enter the option's number):
-1. Enqueue a consumer.
-2. Proceed an amount of consumer from the queue to the shop.
-3. Print the amount of consumers in queue.");
+1. Enqueue a costumer.
+2. Proceed an amount of costumers from the queue to the shop.
+3. Print the costumers in queue.");
             int command;
             do
             {
@@ -50,28 +50,34 @@ Hello, please choose one of the following options (enter the option's number):
                         shop.Enqueue(ReadConsumer());
                     } catch (Exception exception)
                     {
-                        Console.WriteLine($"Could not enqueue the consumer: {exception.Message}");
+                        Console.WriteLine($"Could not enqueue the costumer: {exception.Message}");
                     }
                     break;
                 case ShopCommand.ProceedConsumers:
                     Console.WriteLine("Please enter a number: ");
-                    var proceededConsumers = shop.ProceedConsumers(ReadNumber());
-                    Console.WriteLine($"{proceededConsumers} consumers were proceeded to store.");
+                    var proceededConsumers = shop.ProceedCostumers(ReadNumber());
+                    Console.WriteLine($"{proceededConsumers} costumers were proceeded to store.");
                     break;
                 case ShopCommand.Print:
-                    Console.WriteLine($"There are {shop.QueuedConsumers.Length} consumers in queue.");
+                    Console.WriteLine($"There are {shop.QueuedCostumers.Length} costumers in the queue.");
+                    foreach (var consumer in shop.QueuedCostumers)
+                    {
+                        Console.WriteLine($"* {consumer.Name}");
+                    }
                     break;
             }
         }
 
-        private static Consumer ReadConsumer()
+        private static Costumer ReadConsumer()
         {
-            Consumer consumer = new Consumer();
-            Console.WriteLine("Is the consumer masked?(Y/N)");
+            Console.WriteLine("What's the costumer's name?");
+            string name = Console.ReadLine();
+            Costumer consumer = new Costumer(name);
+            Console.WriteLine("Is the costumer masked?(Y/N)");
             consumer.Masked = ReadBool();
-            Console.WriteLine("Is the consumer in quarantine?(Y/N)");
+            Console.WriteLine("Is the costumer in quarantine?(Y/N)");
             consumer.Quarantined = ReadBool();
-            Console.WriteLine("What's the consumer's body temperature (C)?");
+            Console.WriteLine("What's the costumer's body temperature (C)?");
             consumer.BodyTemperature = ReadFloat();
             return consumer;
         }
