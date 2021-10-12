@@ -11,7 +11,7 @@ namespace AgamCourse
         public bool Masked { get; set; }
         public bool Quarantined { get; set; }
 
-        public Person(string name, float bodyTemparature, bool masked, bool quarantined)
+        public Person(string name)
         {
             Name = name;
         }
