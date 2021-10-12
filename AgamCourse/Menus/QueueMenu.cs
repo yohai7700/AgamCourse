@@ -12,7 +12,7 @@ namespace AgamCourse
         ChooseRegister
     }
 
-    class ShopMenu : InternalMenu
+    class QueueMenu : InternalMenu
     {
         Shop _shop;
         static readonly string[] Options = new string[] { 
@@ -21,7 +21,7 @@ namespace AgamCourse
             "Print the costumers in queue" 
         };
 
-        public ShopMenu(Shop shop) : base(Options)
+        public QueueMenu(Shop shop) : base(Options)
         {
             this._shop = shop;
         }

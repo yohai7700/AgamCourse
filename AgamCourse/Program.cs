@@ -7,8 +7,8 @@ namespace AgamCourse
         static void Main(string[] args) 
         {
             Shop shop = new Shop();
-            ShopMenu prompt = new ShopMenu(shop);
-            prompt.Run();
+            MainMenu menu = new MainMenu(shop);
+            menu.Run();
         }
     }
 }
