@@ -15,13 +15,13 @@ namespace AgamCourse
     class QueueMenu : InternalMenu
     {
         Shop _shop;
-        static readonly string[] Options = new string[] { 
+        static readonly string[] _options = new string[] { 
             "Enqueue a costumer", 
             "Proceed an amount of costumers from the queue to the shop", 
             "Print the costumers in queue" 
         };
 
-        public QueueMenu(Shop shop) : base(Options)
+        public QueueMenu(Shop shop) : base(_options)
         {
             this._shop = shop;
         }

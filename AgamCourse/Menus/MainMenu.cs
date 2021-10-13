@@ -13,6 +13,7 @@ namespace AgamCourse
 
         QueueMenu _queueMenu;
 
+
         public MainMenu(Shop shop) : base(Options, false)
         {
             _queueMenu = new QueueMenu(shop);
