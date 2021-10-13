@@ -6,14 +6,17 @@ namespace AgamCourse
     class Shop
     {
         CovidQueue<Costumer> _queue = new CovidQueue<Costumer>();
-        List<Costumer> _consumers = new List<Costumer>();
+        List<Costumer> _costumers = new List<Costumer>();
         List<CashRegister> _registers = new List<CashRegister>();
 
         public Costumer[] QueuedCostumers { get => _queue.ToArray(); }
+        public Costumer[] Costumers { get => _costumers.ToArray(); }
 
         public Shop()
         {
-            _registers.Add(new CashRegister());
+            var register = new CashRegister();
+            register.Operator = new Employee("Some Name");
+            _registers.Add(register);
             _registers.Add(new CashRegister());
             _registers.Add(new CashRegister());
         }
@@ -34,7 +37,7 @@ namespace AgamCourse
             int amount = Math.Min(desiredAmount, _queue.Count);
             for(int i = 0; i < amount; i++)
             {
-                _consumers.Add(_queue.Dequeue());
+                _costumers.Add(_queue.Dequeue());
             }
             return amount;
         }

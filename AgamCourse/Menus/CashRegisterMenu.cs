@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace AgamCourse.Menus
 {
@@ -36,8 +36,22 @@ namespace AgamCourse.Menus
                 Console.WriteLine("No cash register is available at the moment, please try later.");
                 return;
             }
-            availableRegister.Costumer = new Costumer("Name");
-            Console.WriteLine("Assigned to Cash Register");
+            var costumer = RenderCostumersDialog();
+            if (costumer == null)
+            {
+                Console.WriteLine("No costumer is in the shop right now, can't assign to cash register.");
+                return;
+            }
+            Console.WriteLine($"Assigned to Cash Register: {costumer.Name}");
+        }
+
+        private Costumer RenderCostumersDialog()
+        {
+            var costumers = _shop.Costumers;
+            if (costumers.Length == 0) return null;
+
+            var costumerIndex = new Infra.OptionsDialog(costumers.Select(costumer => costumer.Name).ToArray()).Render();
+            return costumers[costumerIndex];
         }
     }
 }

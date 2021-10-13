@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using AgamCourse.Menus.Infra;
 
 namespace AgamCourse
 {
@@ -30,18 +29,10 @@ namespace AgamCourse
             while (!_finished) Display();
         }
 
-        protected virtual void PrintOptions()
+        int ReadOptionSelection()
         {
             Console.WriteLine("Hello, please choose one of the following options (enter the option's number): ");
-            for (int i = 0; i < Options.Length; i++)
-            {
-                PrintOption(i + 1, Options[i]);
-            }
-        }
-
-        private void PrintOption(int index, string message)
-        {
-            Console.WriteLine($"{index}. {message}.");
+            return new OptionsDialog(Options).Render();
         }
 
         protected void Finish()
@@ -51,23 +42,12 @@ namespace AgamCourse
 
         public void Display()
         {
-            PrintOptions();
-            var selectedOption = ReadOptionSelect();
+            var selectedOption = ReadOptionSelection() + 1;
             if(Internal && selectedOption == Options.Length)
             {
                 Finish();
             }
             else OnOptionSelection(selectedOption);
-        }
-
-        private int ReadOptionSelect()
-        {
-            int selection;
-            do
-            {
-                selection = ReadNumber();
-            } while (!(1 <= selection && selection <= Options.Length));
-            return selection;
         }
 
         public abstract void OnOptionSelection(int option);
