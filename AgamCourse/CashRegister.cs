@@ -6,9 +6,20 @@ namespace AgamCourse
     {
         public Employee Operator { get; set; }
 
+        Costumer _costumer;
+        public Costumer Costumer
+        {
+            get { return _costumer; }
+            set
+            {
+                if (Operator == null) throw new UnoperatedCashRegisterException();
+                _costumer = value;
+            }
+        }
+
         public IList<Purchase> _purchases = new List<Purchase>();
 
-        public bool Available { get => Operator != null; }
+        public bool Available { get => Costumer == null && Operator != null; }
 
         public void RegisterPurchase(Costumer consumer, Product[] products)
         {
@@ -16,4 +27,6 @@ namespace AgamCourse
         }
     
     }
+    
+    class UnoperatedCashRegisterException : System.Exception { }
 }
