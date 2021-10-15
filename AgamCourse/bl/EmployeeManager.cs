@@ -12,7 +12,7 @@ namespace AgamCourse.bl
         public Employee[] Employees { get => _employees.ToArray(); }
         public EmployeeFine[] EmployeeFines { get => _fines.ToArray(); }
 
-        public void RegisterEmployee(Employee employee)
+        public void Register(Employee employee)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace AgamCourse.bl
             }
         }
 
-        public void UnregisterEmployee(Employee employee)
+        public void Unregister(Employee employee)
         {
             _employees.Remove(employee);
         }

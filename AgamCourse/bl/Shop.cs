@@ -9,7 +9,7 @@ namespace AgamCourse
         CovidQueue<Costumer> _queue = new CovidQueue<Costumer>();
         List<Costumer> _costumers = new List<Costumer>();
         List<CashRegister> _registers = new List<CashRegister>();
-        EmployeeManager EmployeeManager { get; }
+        public EmployeeManager EmployeeManager { get; }
 
         public Costumer[] QueuedCostumers { get => _queue.ToArray(); }
         public Costumer[] Costumers { get => _costumers.ToArray(); }

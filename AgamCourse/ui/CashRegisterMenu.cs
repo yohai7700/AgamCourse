@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace AgamCourse.Menus
+namespace AgamCourse.ui
 {
     enum Option
     {

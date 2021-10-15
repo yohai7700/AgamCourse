@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AgamCourse.Menus.Infra
+namespace AgamCourse.ui.Infra
 {
     class OptionsDialog
     {

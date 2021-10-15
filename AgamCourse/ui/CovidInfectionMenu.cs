@@ -2,7 +2,7 @@
 using System;
 using AgamCourse.bl;
 
-namespace AgamCourse.Menus
+namespace AgamCourse.ui
 {
     public class CovidInfectionMenu : InternalMenu
     {
