@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace AgamCourse.bl
 {
@@ -37,6 +36,15 @@ namespace AgamCourse.bl
         public Person[] FindInfectedPeople(Person infected)
         {
             var infectedSet = new HashSet<Person>();
+            foreach (var shift in _shop.CashRegisterShifts)
+            {
+                if (shift.Purchases.Any(purchase => purchase.Costumer.Equals(infected)))
+                {
+                    infectedSet.Add(shift.Employee);
+                    foreach (var purchase in shift.Purchases) infectedSet.Add(purchase.Costumer);
+                }
+            }
+            infectedSet.Remove(infected);
             return setToArray(infectedSet);
         }
 
