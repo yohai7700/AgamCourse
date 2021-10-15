@@ -1,5 +1,6 @@
 ﻿using System;
 using AgamCourse.ui;
+using AgamCourse.bl;
 
 namespace AgamCourse
 {
@@ -31,14 +32,7 @@ namespace AgamCourse
             switch (command)
             {
                 case ShopCommand.Enqueue:
-                    try
-                    {
-                        _shop.Enqueue(ReadConsumer());
-                    }
-                    catch (Exception exception)
-                    {
-                        Console.WriteLine($"Could not enqueue the costumer: {exception.Message}");
-                    }
+                    RunEnqueueDialog();
                     break;
                 case ShopCommand.ProceedConsumers:
                     Console.WriteLine("Please enter a number: ");
@@ -59,6 +53,28 @@ namespace AgamCourse
                         Console.WriteLine("No available register was found");
                     }
                     break;
+            }
+        }
+
+        private void RunEnqueueDialog()
+        {
+            try
+            {
+                _shop.Enqueue(ReadConsumer());
+            }
+            catch (UnmaskedPersonException)
+            {
+                Console.WriteLine("Can't insert an unmasked person to the Queue.");
+            }
+            catch (QuarantinedPersonException)
+            {
+                Console.WriteLine("Can't insert a quarantined person to the Queue.");
+
+            }
+            catch (HighBodyTemperatureException)
+            {
+                Console.WriteLine($"Cant insert a person with a body temperature higher than {CovidCriteria.MaxBodyTemperature}C");
+
             }
         }
 

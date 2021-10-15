@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using AgamCourse.bl;
 
 namespace AgamCourse
 {
@@ -8,6 +9,7 @@ namespace AgamCourse
         CovidQueue<Costumer> _queue = new CovidQueue<Costumer>();
         List<Costumer> _costumers = new List<Costumer>();
         List<CashRegister> _registers = new List<CashRegister>();
+        EmployeeManager EmployeeManager { get; }
 
         public Costumer[] QueuedCostumers { get => _queue.ToArray(); }
         public Costumer[] Costumers { get => _costumers.ToArray(); }
@@ -17,6 +19,7 @@ namespace AgamCourse
 
         public Shop()
         {
+            EmployeeManager = new EmployeeManager();
             var register = new CashRegister();
             register.OnShiftStart += (shift) => _shifts.Add(shift);
             register.Operator = new Employee("Some Name");
