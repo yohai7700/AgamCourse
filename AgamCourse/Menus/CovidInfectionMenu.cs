@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq;
+using System;
 using AgamCourse.bl;
 
 namespace AgamCourse.Menus
@@ -32,13 +31,27 @@ namespace AgamCourse.Menus
         private void CheckInfection()
         {
             var possibleInfectedPeople = _infectionChecker.AllPossibleInfectedPeople;
-            for (int i = 0; i < possibleInfectedPeople.Length; i++)
+            var infectedPerson = ReadInfectedPerson(possibleInfectedPeople);
+            var infectionTargets = _infectionChecker.FindInfectedPeople(infectedPerson);
+            PrintInfectedPeople(infectionTargets);
+        }
+
+        private static void PrintInfectedPeople(Person[] infectedPeople)
+        {
+            Console.WriteLine($"{infectedPeople.Length} people were infected.");
+            foreach (var person in infectedPeople)
             {
-                PrintPerson(i + 1, possibleInfectedPeople[i]);
+                Console.WriteLine($"* {FormatPersonString(person)}");
             }
         }
 
-        private static void PrintPerson(int number, Person person)
+        private static Person ReadInfectedPerson(Person[] options)
+        {
+            var infectedIndex = new Infra.OptionsDialog(options.Select(FormatPersonString).ToArray()).Render();
+            return options[infectedIndex];
+        }
+
+        private static string FormatPersonString(Person person)
         {
             string type = "Person";
             if (person is Costumer)
@@ -50,7 +63,7 @@ namespace AgamCourse.Menus
                 type = "Employee";
             }
 
-            Console.WriteLine($"{number}. {person.Name} - {type}");
+            return $"{person.Name} - {type}";
         }
     }
 }
