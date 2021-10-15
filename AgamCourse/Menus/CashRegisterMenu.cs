@@ -6,14 +6,15 @@ namespace AgamCourse.Menus
 {
     enum Option
     {
-        AssignCashRegister = 1
+        AssignCashRegister = 1,
+        PrintShifts
     }
     class CashRegisterMenu : InternalMenu
     {
-        static readonly string[] _options = new string[] { "Assign to available cash register" };
+        static readonly string[] _options = new string[] { "Assign to available cash register", "Print all shifts" };
 
         Shop _shop;
-        public CashRegisterMenu(Shop shop) : base(_options) 
+        public CashRegisterMenu(Shop shop) : base(_options)
         {
             _shop = shop;
         }
@@ -25,13 +26,16 @@ namespace AgamCourse.Menus
                 case Option.AssignCashRegister:
                     AssignCashRegister();
                     break;
+                case Option.PrintShifts:
+                    PrintAllShifts();
+                    break;
             }
         }
 
         private void AssignCashRegister()
         {
             var availableRegister = _shop.FindAvailableCashRegister();
-            if(availableRegister == null)
+            if (availableRegister == null)
             {
                 Console.WriteLine("No cash register is available at the moment, please try later.");
                 return;
@@ -43,6 +47,17 @@ namespace AgamCourse.Menus
                 return;
             }
             Console.WriteLine($"Assigned to Cash Register: {costumer.Name}");
+        }
+
+        void PrintAllShifts()
+        {
+            var shifts = _shop.CashRegisterShifts;
+            Console.WriteLine($"There have been {shifts} shifts");
+            foreach (var shift in shifts)
+            {
+                string formattedEndDate = shift.Ended ? shift.EndDate.ToString() : "Present";
+                Console.WriteLine($"* {shift.Employee.Name}: {shift.StartDate} - {formattedEndDate}");
+            }
         }
 
         private Costumer RenderCostumersDialog()

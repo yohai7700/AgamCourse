@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgamCourse
 {
-    class Purchase
+    public class Purchase
     {
         public Product[] Products { get; }
         public Employee Operator { get; }

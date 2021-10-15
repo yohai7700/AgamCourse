@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgamCourse
 {
-    class Product
+    public class Product
     {
         public string Name { get; }
         public float Price { get; }

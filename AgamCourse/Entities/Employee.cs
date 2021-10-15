@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgamCourse
 {
-    class Employee : Person
+    public class Employee : Person
     {
         public Employee(string name) : base(name) { }
     }

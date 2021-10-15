@@ -4,8 +4,8 @@ using System.Text;
 
 namespace AgamCourse
 {
-    class Costumer : Person
+    public class Costumer : Person
     {
-        public Costumer(string name): base(name) { }
+        public Costumer(string name) : base(name) { }
     }
 }
