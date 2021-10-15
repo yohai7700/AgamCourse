@@ -8,6 +8,7 @@ namespace AgamCourse
         QueueManagement = 1,
         CashRegister,
         CovidInfection,
+        Exit
     }
     class MainMenu : Menu
     {
@@ -15,7 +16,8 @@ namespace AgamCourse
         {
             "Queue Management",
             "Cash Register Management",
-            "Covid Infection"
+            "Covid Infection",
+            "Exit"
         };
 
         QueueMenu _queueMenu;
@@ -42,6 +44,9 @@ namespace AgamCourse
                     break;
                 case Option.CovidInfection:
                     _covidInfectionMenu.Run();
+                    break;
+                case Option.Exit:
+                    Finish();
                     break;
             }
         }
