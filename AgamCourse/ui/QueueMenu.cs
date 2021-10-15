@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using AgamCourse.ui;
 
 namespace AgamCourse
 {
@@ -15,10 +14,10 @@ namespace AgamCourse
     class QueueMenu : InternalMenu
     {
         Shop _shop;
-        static readonly string[] _options = new string[] { 
-            "Enqueue a costumer", 
-            "Proceed an amount of costumers from the queue to the shop", 
-            "Print the costumers in queue" 
+        static readonly string[] _options = new string[] {
+            "Enqueue a costumer",
+            "Proceed an amount of costumers from the queue to the shop",
+            "Print the costumers in queue"
         };
 
         public QueueMenu(Shop shop) : base(_options)
@@ -67,14 +66,9 @@ namespace AgamCourse
         {
             Console.WriteLine("What's the costumer's name?");
             string name = Console.ReadLine();
-            Costumer consumer = new Costumer(name);
-            Console.WriteLine("Is the costumer masked?(Y/N)");
-            consumer.Masked = ReadBool();
-            Console.WriteLine("Is the costumer in quarantine?(Y/N)");
-            consumer.Quarantined = ReadBool();
-            Console.WriteLine("What's the costumer's body temperature (C)?");
-            consumer.BodyTemperature = ReadFloat();
-            return consumer;
+            var costumer = new Costumer(name);
+            CovidSurvery.Update(costumer);
+            return costumer;
         }
     }
 }
