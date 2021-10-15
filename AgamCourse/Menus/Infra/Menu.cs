@@ -3,7 +3,7 @@ using AgamCourse.Menus.Infra;
 
 namespace AgamCourse
 {
-    abstract class Menu
+    public abstract class Menu
     {
         public string[] Options { get; }
 
@@ -43,7 +43,7 @@ namespace AgamCourse
         public void Display()
         {
             var selectedOption = ReadOptionSelection() + 1;
-            if(Internal && selectedOption == Options.Length)
+            if (Internal && selectedOption == Options.Length)
             {
                 Finish();
             }

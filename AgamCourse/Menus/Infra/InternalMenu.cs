@@ -4,8 +4,8 @@ using System.Text;
 
 namespace AgamCourse
 {
-    abstract class InternalMenu : Menu
+    public abstract class InternalMenu : Menu
     {
-        public InternalMenu(string[] options) : base(options, true) {}
+        public InternalMenu(string[] options) : base(options, true) { }
     }
 }

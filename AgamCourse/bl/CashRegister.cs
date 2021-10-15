@@ -4,7 +4,7 @@ using System;
 namespace AgamCourse
 {
     public delegate void ShiftStartListener(CashRegisterShift shift);
-    class CashRegister
+    public class CashRegister
     {
         CashRegisterShift _shift;
 

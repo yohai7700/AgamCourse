@@ -3,7 +3,7 @@ using System;
 
 namespace AgamCourse
 {
-    class Shop
+    public class Shop
     {
         CovidQueue<Costumer> _queue = new CovidQueue<Costumer>();
         List<Costumer> _costumers = new List<Costumer>();
